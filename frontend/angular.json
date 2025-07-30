@@ -2,6 +2,7 @@
   "version": 1,
   "projects": {
     "frontend": {
+      "root": "",
       "projectType": "application",
       "architect": {
         "build": {
