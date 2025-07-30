@@ -1,0 +1,16 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "nest start"
+  },
+  "dependencies": {
+    "@nestjs/common": "^9.0.0",
+    "@nestjs/core": "^9.0.0",
+    "@nestjs/passport": "^9.0.0",
+    "passport": "^0.6.0",
+    "passport-azure-ad": "^4.3.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^7.0.0"
+  }
+}

@@ -1,1 +1,4 @@
-(contenido del canvas)
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src"
+}

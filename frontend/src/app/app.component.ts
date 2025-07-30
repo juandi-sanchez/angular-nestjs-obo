@@ -1,1 +1,27 @@
-(contenido del canvas)
+import { Component, OnInit } from '@angular/core';
+import { MsalService } from '@azure/msal-angular';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-root',
+  template: '<button (click)="login()">Login</button><pre>{{ data | json }}</pre>',
+})
+export class AppComponent implements OnInit {
+  data: any;
+
+  constructor(private msalService: MsalService, private http: HttpClient) {}
+
+  ngOnInit() {}
+
+  login() {
+    this.msalService.loginPopup().subscribe({
+      next: (result) => {
+        this.http
+          .get('http://localhost:3000/api/protected', {
+            headers: { Authorization: `Bearer ${result.accessToken}` },
+          })
+          .subscribe((res) => (this.data = res));
+      },
+    });
+  }
+}
