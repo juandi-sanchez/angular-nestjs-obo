@@ -13,18 +13,25 @@ exports.JwtStrategy = void 0;
 const passport_1 = require("@nestjs/passport");
 const common_1 = require("@nestjs/common");
 const passport_azure_ad_1 = require("passport-azure-ad");
+const dotenv = require("dotenv");
+dotenv.config();
 let JwtStrategy = class JwtStrategy extends (0, passport_1.PassportStrategy)(passport_azure_ad_1.BearerStrategy, 'oauth-bearer') {
     constructor() {
         super({
             identityMetadata: `https://login.microsoftonline.com/${process.env.AZURE_TENANT_ID}/v2.0/.well-known/openid-configuration`,
             clientID: process.env.AZURE_CLIENT_ID_BACKEND,
+            audience: process.env.AZURE_CLIENT_ID_BACKEND,
             validateIssuer: true,
-            loggingLevel: 'warn',
+            loggingLevel: 'info',
             passReqToCallback: false
         });
     }
-    async validate(token) {
-        return token;
+    async validate(payload) {
+        return {
+            oid: payload.oid,
+            name: payload.name,
+            preferred_username: payload.preferred_username
+        };
     }
 };
 exports.JwtStrategy = JwtStrategy;
