@@ -10,13 +10,31 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    MsalModule.forRoot(new PublicClientApplication({
-      auth: {
-        clientId: 'YOUR_CLIENT_ID',
-        authority: 'https://login.microsoftonline.com/YOUR_TENANT_ID',
-        redirectUri: '/',
+    MsalModule.forRoot(
+      new PublicClientApplication({
+        auth: {
+          clientId: 'YOUR_CLIENT_ID',
+          authority: 'https://login.microsoftonline.com/YOUR_TENANT_ID',
+          redirectUri: '/',
+        },
+        cache: {
+          cacheLocation: 'localStorage',
+          storeAuthStateInCookie: false,
+        },
+      }),
+      {
+        interactionType: 'popup',
+        authRequest: {
+          scopes: ['user.read'],
+        },
+      },
+      {
+        interactionType: 'popup',
+        protectedResourceMap: new Map([
+          ['http://localhost:3000/api/protected', ['api://YOUR_BACKEND_CLIENT_ID/access_as_user']],
+        ]),
       }
-    }), null, null)
+    ),
   ],
   providers: [],
   bootstrap: [AppComponent, MsalRedirectComponent],
