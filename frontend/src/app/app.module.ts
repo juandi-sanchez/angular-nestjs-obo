@@ -1,6 +1,6 @@
 import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { MsalModule, MsalService, MSAL_INSTANCE } from '@azure/msal-angular';
 import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
@@ -17,26 +17,20 @@ export function MsalInstanceFactory(): IPublicClientApplication {
   });
 }
 
-@NgModule({
-  declarations: [AppComponent],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    MsalModule
-  ],
-  providers: [
-    {
-      provide: MSAL_INSTANCE,
-      useFactory: MsalInstanceFactory
-    },
-    MsalService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (msalService: MsalService) => () => msalService.initialize(),
-      deps: [MsalService],
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [AppComponent],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        MsalModule], providers: [
+        {
+            provide: MSAL_INSTANCE,
+            useFactory: MsalInstanceFactory
+        },
+        MsalService,
+        {
+            provide: APP_INITIALIZER,
+            useFactory: (msalService: MsalService) => () => msalService.initialize(),
+            deps: [MsalService],
+            multi: true
+        },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {}
