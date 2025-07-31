@@ -3,8 +3,9 @@ import { MsalService } from '@azure/msal-angular';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-root',
-  template: '<button (click)="login()">Login</button><pre>{{ data | json }}</pre>',
+    selector: 'app-root',
+    template: '<button (click)="login()">Login</button><pre>{{ data | json }}</pre>',
+    standalone: false
 })
 export class AppComponent implements OnInit {
   data: any;
