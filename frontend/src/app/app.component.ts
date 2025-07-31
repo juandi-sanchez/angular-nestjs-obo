@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
 
 login() {
   this.msalService.acquireTokenPopup({
-    scopes: ['api://<BACKEND_CLIENT_ID>/access_as_user']
+    scopes: ['api://test-westinghouse-api/access_as_user']
   }).subscribe({
     next: (result) => {
       this.http.get('http://localhost:3000/api/protected', {
