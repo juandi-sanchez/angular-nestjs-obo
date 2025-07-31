@@ -10,8 +10,8 @@ import { AppComponent } from './app.component';
 export function MsalInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
     auth: {
-      clientId: 'YOUR_CLIENT_ID',
-      authority: 'https://login.microsoftonline.com/YOUR_TENANT_ID',
+      clientId: '657e4d51-b680-40b6-a8b8-238d20dc18f2',
+      authority: 'https://login.microsoftonline.com/0cc46ae4-f9bb-457f-89ce-bfdf49724174',
       redirectUri: '/',
     }
   });
