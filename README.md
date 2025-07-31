@@ -1,4 +1,4 @@
-# Angular 20 + NestJS API con Azure Entra ID y OBO
+# Angular 20 + NestJS 11 API con Azure Entra ID y OBO
 
 ## Instalación
 
